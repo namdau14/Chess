@@ -8,6 +8,6 @@ To run the program, simply install python and its library pygame
 pip install pygame
 ```
 
-then run the file chess.display.py
+then run the file `chess_display.py`
 
 I am plannig to eventually develop a front-end and host this on a website as well
