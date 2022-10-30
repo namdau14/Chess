@@ -46,7 +46,7 @@ class ChessGame():
     """ 
     Make a move
     """
-    def make_move(self, move):
+    def make_move(self, move, letters_map, chess_dimension, game_move_log, move_array):
         valid_moves = []
         if self.chess_board[move.start_row][move.start_col] == 'white_rook':
             valid_moves = self.white_rook.get_valid_rook_moves(move, self.chess_board)
@@ -66,6 +66,8 @@ class ChessGame():
             # set the moved square to the piece
             self.chess_board[move.end_row][move.end_col] = move.piece_moved
             # TODO: set piece captured to be removed from the game
+            # log the move
+            print(move.display_chess_notation(letters_map, chess_dimension, game_move_log, move_array))
 
 
 # if __name__ == '__main__':

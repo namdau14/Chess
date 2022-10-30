@@ -88,9 +88,7 @@ class ChessDisplay():
                             move_array.append((clicked_row, clicked_col))
                             if len(move_array) == 2:
                                 move = Move(chess_game.chess_board, move_array[0], move_array[1])
-                                chess_game.make_move(move)
-                                # log the move
-                                print(move.display_chess_notation(LETTERS_MAP, CHESS_DIMENSION, game_move_log, move_array))
+                                chess_game.make_move(move, LETTERS_MAP, CHESS_DIMENSION, game_move_log, move_array)
                                 # reset move array to continue with next move
                                 move_array = []              
 
