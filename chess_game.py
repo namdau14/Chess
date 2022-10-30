@@ -5,6 +5,8 @@ CHESS_DIMENSION = 8
 from rook import Rook
 from knight import Knight
 from bishop import Bishop
+from queen import Queen
+from king import King
 
 
 class ChessGame():
@@ -24,6 +26,10 @@ class ChessGame():
         self.black_knight = Knight(is_white = False)
         self.white_bishop = Bishop(is_white = True)
         self.black_bishop = Bishop(is_white = False)
+        self.white_queen = Queen(is_white = True)
+        self.black_queen = Queen(is_white = False)
+        self.white_king = King(is_white = True)
+        self.black_king = King(is_white = False)
 
 
     
@@ -32,8 +38,8 @@ class ChessGame():
     positions of the game 
     """
     def initial_state(self):
-        black_pieces = [self.black_rook.get_text(), self.black_knight.get_text(), self.black_bishop.get_text(), 'black_queen', 'black_king']
-        white_pieces = [self.white_rook.get_text(), self.white_knight.get_text(), self.white_bishop.get_text(), 'white_queen', 'white_king']
+        black_pieces = [self.black_rook.get_text(), self.black_knight.get_text(), self.black_bishop.get_text(), self.black_queen.get_text(), self.black_king.get_text()]
+        white_pieces = [self.white_rook.get_text(), self.white_knight.get_text(), self.white_bishop.get_text(), self.white_queen.get_text(), self.white_king.get_text()]
         # place black pieces
         self.chess_board[0][0:5] = black_pieces[0:5]
         self.chess_board[0][5:8] = black_pieces[0:3][::-1]
@@ -63,6 +69,14 @@ class ChessGame():
             valid_moves = self.white_bishop.get_valid_bishop_moves(move, self.chess_board)
         elif self.chess_board[move.start_row][move.start_col] == 'black_bishop':
             valid_moves = self.black_bishop.get_valid_bishop_moves(move, self.chess_board)
+        elif self.chess_board[move.start_row][move.start_col] == 'white_queen':
+            valid_moves = self.white_queen.get_valid_queen_moves(move, self.chess_board)
+        elif self.chess_board[move.start_row][move.start_col] == 'black_queen':
+            valid_moves = self.black_queen.get_valid_queen_moves(move, self.chess_board)
+        elif self.chess_board[move.start_row][move.start_col] == 'white_king':
+            valid_moves = self.white_king.get_valid_king_moves(move, self.chess_board)
+        elif self.chess_board[move.start_row][move.start_col] == 'black_king':
+            valid_moves = self.black_king.get_valid_king_moves(move, self.chess_board)
         else:
             valid_moves = self.chess_board
 

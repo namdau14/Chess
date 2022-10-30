@@ -194,8 +194,5 @@ class ChessDisplay():
         pygame.draw.rect(board_screen, pygame.Color((0, 0, 0)), pygame.Rect(x_cord, y_cord, width, height), width = 2)
 
 
-
-
-
 if __name__ == '__main__':
     ChessDisplay().main()
