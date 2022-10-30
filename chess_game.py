@@ -4,6 +4,7 @@ CHESS_DIMENSION = 8
 
 from rook import Rook
 from knight import Knight
+from bishop import Bishop
 
 
 class ChessGame():
@@ -21,6 +22,8 @@ class ChessGame():
         self.black_rook = Rook(is_white = False)
         self.white_knight = Knight(is_white = True)
         self.black_knight = Knight(is_white = False)
+        self.white_bishop = Bishop(is_white = True)
+        self.black_bishop = Bishop(is_white = False)
 
 
     
@@ -29,8 +32,8 @@ class ChessGame():
     positions of the game 
     """
     def initial_state(self):
-        black_pieces = [self.black_rook.get_text(), self.black_knight.get_text(), 'black_bishop', 'black_queen', 'black_king']
-        white_pieces = [self.white_rook.get_text(), self.white_knight.get_text(), 'white_bishop', 'white_queen', 'white_king']
+        black_pieces = [self.black_rook.get_text(), self.black_knight.get_text(), self.black_bishop.get_text(), 'black_queen', 'black_king']
+        white_pieces = [self.white_rook.get_text(), self.white_knight.get_text(), self.white_bishop.get_text(), 'white_queen', 'white_king']
         # place black pieces
         self.chess_board[0][0:5] = black_pieces[0:5]
         self.chess_board[0][5:8] = black_pieces[0:3][::-1]
@@ -54,9 +57,12 @@ class ChessGame():
             valid_moves = self.black_rook.get_valid_rook_moves(move, self.chess_board)
         elif self.chess_board[move.start_row][move.start_col] == 'white_knight':
             valid_moves = self.white_knight.get_valid_knight_moves(move, self.chess_board)
-            print(valid_moves)
         elif self.chess_board[move.start_row][move.start_col] == 'black_knight':
             valid_moves = self.black_knight.get_valid_knight_moves(move, self.chess_board)
+        elif self.chess_board[move.start_row][move.start_col] == 'white_bishop':
+            valid_moves = self.white_bishop.get_valid_bishop_moves(move, self.chess_board)
+        elif self.chess_board[move.start_row][move.start_col] == 'black_bishop':
+            valid_moves = self.black_bishop.get_valid_bishop_moves(move, self.chess_board)
         else:
             valid_moves = self.chess_board
 
