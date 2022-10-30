@@ -4,8 +4,9 @@ Chess program coded by me to practice OOP Projects and System Design. I followed
 and added in my own implementation
 
 To run the program, simply install python and its library pygame
-
+```
 pip install pygame
+```
 
 then run the file chess.display.py
 
