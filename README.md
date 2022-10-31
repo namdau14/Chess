@@ -1,4 +1,4 @@
-# Chess_Nam_Dau
+# Chess
 
 Chess program coded by me to practice OOP Projects and System Design. I followed the instruction from this youtube series: https://www.youtube.com/watch?v=EnYui0e73Rs&list=PLBwF487qi8MGU81nDGaeNE1EnNEPYWKY_&index=2 initially and added in my own implementation.
 
