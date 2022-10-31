@@ -1,16 +1,14 @@
 # used to display the game
 
 
-# TODO Get new images for the chess pieces. display moveset array on GUI. Start implementing specific rules for each piece (start with pawn), implement white-black move switching
-# FIXIT: Pieces of the same color don't capture each other. Prevent move log from recording illegal moves
+# TODO Get new images for the chess pieces. display moveset array on GUI. Start implementing rules for pawn and king (castling), implement white-black move switching. Start looking in to checks and checkmate
+# FIXIT: Pieces of the same color don't capture each other
 
 
-from tkinter import CENTER
 from chess_game import ChessGame
 import pygame
 from pygame.locals import * # import commands such as QUIT, MOUSEBUTTONDOWN
 from move import Move
-from pawn import Pawn
 
 # dimension of actual board
 BOARD_DIMENSION = 1000
