@@ -8,7 +8,7 @@
 
 from chess_game import ChessGame
 import pygame
-from pygame.locals import * # import commands such as QUIT, MOUSEBUTTONDOWN
+from pygame.locals import * # import commands such as QUIT, MOUSEBUTTONDOWN,...
 from move import Move
 
 # dimension of actual board
@@ -67,6 +67,10 @@ class ChessDisplay():
 
         valid_moves = []
 
+        # numbers to keep track of the clicked row and col (set to negative infinity first to avoid being mistaken for a game square)
+
+        clicked_row, clicked_col  = -float('inf'), -float('inf')
+
         # run the game
         run = True
         while run:
@@ -105,7 +109,7 @@ class ChessDisplay():
 
   
             # while game is running, display the current state of the game
-            self.display_current_state(board_screen, chess_game, valid_moves) 
+            self.display_current_state(board_screen, chess_game, valid_moves, clicked_row, clicked_col, move_array) 
             pygame.display.flip()
 
     '''
@@ -142,15 +146,15 @@ class ChessDisplay():
     display the current state of the game
     '''
 
-    def display_current_state(self, board_screen, chess_game, valid_moves):
-        self.display_board(board_screen, valid_moves)
-        self.display_pieces(board_screen, chess_game)
+    def display_current_state(self, board_screen, chess_game, valid_moves, clicked_row, clicked_col, move_array):
+        self.display_board(board_screen, chess_game, valid_moves)
+        self.display_pieces(board_screen, chess_game, clicked_row, clicked_col, move_array)
         self.display_moveset_box(board_screen)
 
     '''
     display the chess board
     '''
-    def display_board(self, board_screen, valid_moves):
+    def display_board(self, board_screen, chess_game, valid_moves):
         # light squares are placed where row num + col num = even number (zero index)
         # dark squares are placed where row num + col num = odd number (zero index)
 
@@ -166,19 +170,32 @@ class ChessDisplay():
                 # color the valid moves square
 
                 if (row, col) in valid_moves:
-                    surface.fill((255, 255, 0))
+                    # if the square is not empty, draw a bigger circle without filling to easily identify
+                    if chess_game.chess_board[row][col] != ' ':
+                        pygame.draw.circle(surface, color = pygame.Color(192,192,192), center = (PIECE_SIZE / 2, PIECE_SIZE / 2), radius = PIECE_SIZE / 2, width = 4)
+                    # else, draw smaller circle with filling
+                    else:
+                        pygame.draw.circle(surface, color = pygame.Color(192,192,192), center = (PIECE_SIZE / 2, PIECE_SIZE / 2), radius = PIECE_SIZE / 8)
                 # multiply with row and col so that the sqaures fit in the correct index
                 board_screen.blit(surface, (CENTER_INDEX + col * PIECE_SIZE, CENTER_INDEX + row * PIECE_SIZE))
 
     '''
     display the chess pieces and the leters/number designation
     '''
-    def display_pieces(self, board_screen, chess_game):
+    def display_pieces(self, board_screen, chess_game, clicked_row, clicked_col, move_array):
+
+        highlight_surface = pygame.Surface((PIECE_SIZE, PIECE_SIZE))
 
         for row in range(CHESS_DIMENSION):
             for col in range(CHESS_DIMENSION):
                 piece = chess_game.chess_board[row][col]
                 if piece != ' ':
+                    # if user click on a piece to move it, highlight the square under that piece
+                    if row == clicked_row and col == clicked_col and len(move_array) == 1:
+                        highlight_surface.fill((255, 255, 0))
+                        board_screen.blit(highlight_surface, (CENTER_INDEX + col * PIECE_SIZE, CENTER_INDEX + row * PIECE_SIZE))
+
+                    # fill non-empty sqaure with their corresponding piece
                     board_screen.blit(TEXT_TO_IMAGE[piece], (CENTER_INDEX + col * PIECE_SIZE, CENTER_INDEX + row * PIECE_SIZE))
                 # place the letters in their respective row
                 if row == 7:
