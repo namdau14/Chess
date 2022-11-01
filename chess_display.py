@@ -89,8 +89,13 @@ class ChessDisplay():
                             clicked_row = int((mouse_row - CENTER_INDEX) // PIECE_SIZE)
                             # save a move array to use for chess notation and to limit clicks
                             move_array.append((clicked_row, clicked_col))
+
                             if len(move_array) == 1:
                                 valid_moves = chess_game.get_valid_moves(clicked_row, clicked_col)
+                                # if clicked on empty square, reset click
+                                if (chess_game.chess_board[clicked_row][clicked_col] == ' '):
+                                    move_array = [] 
+                                
                             if len(move_array) == 2:
                                 move = Move(chess_game.chess_board, move_array[0], move_array[1])
                                 game_move_log = chess_game.make_move(move, LETTERS_MAP, CHESS_DIMENSION, game_move_log, move_array, valid_moves)
