@@ -161,7 +161,7 @@ class ChessDisplay():
                 # color the valid moves square
 
                 if (row, col) in valid_moves:
-                    pygame.draw.circle(surface, pygame.Color((180,180,180)), (PIECE_SIZE / 2, PIECE_SIZE / 2), PIECE_SIZE / 8, width = 0)
+                    surface.fill((255, 255, 0))
                 # multiply with row and col so that the sqaures fit in the correct index
                 board_screen.blit(surface, (CENTER_INDEX + col * PIECE_SIZE, CENTER_INDEX + row * PIECE_SIZE))
 
