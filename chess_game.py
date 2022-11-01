@@ -7,6 +7,7 @@ from knight import Knight
 from bishop import Bishop
 from queen import Queen
 from king import King
+from pawn import Pawn
 
 
 class ChessGame():
@@ -30,6 +31,8 @@ class ChessGame():
         self.black_queen = Queen(is_white = False)
         self.white_king = King(is_white = True)
         self.black_king = King(is_white = False)
+        self.white_pawn = Pawn(is_white = True)
+        self.black_pawn = Pawn(is_white = False)
 
 
     
@@ -44,12 +47,12 @@ class ChessGame():
         self.chess_board[0][0:5] = black_pieces[0:5]
         self.chess_board[0][5:8] = black_pieces[0:3][::-1]
         # place black pawns
-        self.chess_board[1] = ['black_pawn'] * CHESS_DIMENSION
+        self.chess_board[1] = [self.black_pawn.get_text()] * CHESS_DIMENSION
         # place white pieces
         self.chess_board[7][0:5] = white_pieces[0:5]
         self.chess_board[7][5:8] = white_pieces[0:3][::-1]
         # place white pawns
-        self.chess_board[6] = ['white_pawn'] * CHESS_DIMENSION
+        self.chess_board[6] = [self.white_pawn.get_text()] * CHESS_DIMENSION
         return self.chess_board
         
     """ 
@@ -77,8 +80,10 @@ class ChessGame():
             valid_moves = self.white_king.get_valid_king_moves(move, self.chess_board)
         elif self.chess_board[move.start_row][move.start_col] == 'black_king':
             valid_moves = self.black_king.get_valid_king_moves(move, self.chess_board)
-        else:
-            valid_moves = self.chess_board
+        elif self.chess_board[move.start_row][move.start_col] == 'white_pawn':
+            valid_moves = self.white_pawn.get_valid_pawn_moves(move, self.chess_board)
+        elif self.chess_board[move.start_row][move.start_col] == 'black_pawn':
+            valid_moves = self.black_pawn.get_valid_pawn_moves(move, self.chess_board)
 
         if (move.end_row, move.end_col) in valid_moves:
             # set the beginning square to blank space

@@ -2,6 +2,7 @@
 
 
 # TODO Get new images for the chess pieces. display moveset array on GUI. Start implementing rules for pawn and king (castling), implement white-black move switching. Start looking in to checks and checkmate
+# TODO tomorrow: implement dfs algorithm for rook and bishop
 # FIXIT: Pieces of the same color don't capture each other
 
 
@@ -145,7 +146,7 @@ class ChessDisplay():
             for col in range(CHESS_DIMENSION):
                 surface = pygame.Surface((PIECE_SIZE, PIECE_SIZE))
                 if ((row + col) % 2 == 0):
-                    surface.fill((177 ,228, 185))
+                    surface.fill((177, 228, 185))
                 elif ((row + col) % 2 == 1):
                     surface.fill((112, 162, 163))
                 # multiply with row and col, essentially stacking the squares on top of each other

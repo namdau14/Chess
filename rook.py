@@ -14,6 +14,8 @@ class Rook():
     def is_valid_rook_move(self, move, row, col):
         return move.start_row == row or move.start_col == col
 
+    # probably need a dfs algorithm here
+
     def get_valid_rook_moves(self, move, chess_board):
         valid_rook_moves = []
         for row in range(len(chess_board)):
