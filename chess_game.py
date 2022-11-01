@@ -9,6 +9,8 @@ from queen import Queen
 from king import King
 from pawn import Pawn
 
+import pygame
+
 
 class ChessGame():
     # default constructor
@@ -54,36 +56,43 @@ class ChessGame():
         # place white pawns
         self.chess_board[6] = [self.white_pawn.get_text()] * CHESS_DIMENSION
         return self.chess_board
+
+    '''
+    return list of valid moves (for hightlighting)
+    '''
+
+    def get_valid_moves(self, start_row, start_col):
+        if self.chess_board[start_row][start_col] == 'white_rook':
+            return self.white_rook.get_valid_rook_moves(self.chess_board, start_row, start_col)
+        elif self.chess_board[start_row][start_col] == 'black_rook':
+            return self.black_rook.get_valid_rook_moves(self.chess_board, start_row, start_col)
+        elif self.chess_board[start_row][start_col] == 'white_knight':
+            return self.white_knight.get_valid_knight_moves(self.chess_board, start_row, start_col)
+        elif self.chess_board[start_row][start_col] == 'black_knight':
+            return self.black_knight.get_valid_knight_moves(self.chess_board, start_row, start_col)
+        elif self.chess_board[start_row][start_col] == 'white_bishop':
+            return self.white_bishop.get_valid_bishop_moves(self.chess_board, start_row, start_col)
+        elif self.chess_board[start_row][start_col] == 'black_bishop':
+            return self.black_bishop.get_valid_bishop_moves(self.chess_board, start_row, start_col)
+        elif self.chess_board[start_row][start_col] == 'white_queen':
+            return self.white_queen.get_valid_queen_moves(self.chess_board, start_row, start_col)
+        elif self.chess_board[start_row][start_col] == 'black_queen':
+            return self.black_queen.get_valid_queen_moves(self.chess_board, start_row, start_col)
+        elif self.chess_board[start_row][start_col] == 'white_king':
+            return self.white_king.get_valid_king_moves(self.chess_board, start_row, start_col)
+        elif self.chess_board[start_row][start_col] == 'black_king':
+            return self.black_king.get_valid_king_moves(self.chess_board, start_row, start_col)
+        elif self.chess_board[start_row][start_col] == 'white_pawn':
+            return self.white_pawn.get_valid_pawn_moves(self.chess_board, start_row, start_col)
+        elif self.chess_board[start_row][start_col] == 'black_pawn':
+            return self.black_pawn.get_valid_pawn_moves(self.chess_board, start_row, start_col)
+        else:
+            return []
         
     """ 
     Make a move
     """
-    def make_move(self, move, letters_map, chess_dimension, game_move_log, move_array):
-        valid_moves = []
-        if self.chess_board[move.start_row][move.start_col] == 'white_rook':
-            valid_moves = self.white_rook.get_valid_rook_moves(move, self.chess_board)
-        elif self.chess_board[move.start_row][move.start_col] == 'black_rook':
-            valid_moves = self.black_rook.get_valid_rook_moves(move, self.chess_board)
-        elif self.chess_board[move.start_row][move.start_col] == 'white_knight':
-            valid_moves = self.white_knight.get_valid_knight_moves(move, self.chess_board)
-        elif self.chess_board[move.start_row][move.start_col] == 'black_knight':
-            valid_moves = self.black_knight.get_valid_knight_moves(move, self.chess_board)
-        elif self.chess_board[move.start_row][move.start_col] == 'white_bishop':
-            valid_moves = self.white_bishop.get_valid_bishop_moves(move, self.chess_board)
-        elif self.chess_board[move.start_row][move.start_col] == 'black_bishop':
-            valid_moves = self.black_bishop.get_valid_bishop_moves(move, self.chess_board)
-        elif self.chess_board[move.start_row][move.start_col] == 'white_queen':
-            valid_moves = self.white_queen.get_valid_queen_moves(move, self.chess_board)
-        elif self.chess_board[move.start_row][move.start_col] == 'black_queen':
-            valid_moves = self.black_queen.get_valid_queen_moves(move, self.chess_board)
-        elif self.chess_board[move.start_row][move.start_col] == 'white_king':
-            valid_moves = self.white_king.get_valid_king_moves(move, self.chess_board)
-        elif self.chess_board[move.start_row][move.start_col] == 'black_king':
-            valid_moves = self.black_king.get_valid_king_moves(move, self.chess_board)
-        elif self.chess_board[move.start_row][move.start_col] == 'white_pawn':
-            valid_moves = self.white_pawn.get_valid_pawn_moves(move, self.chess_board)
-        elif self.chess_board[move.start_row][move.start_col] == 'black_pawn':
-            valid_moves = self.black_pawn.get_valid_pawn_moves(move, self.chess_board)
+    def make_move(self, move, letters_map, chess_dimension, game_move_log, move_array, valid_moves):
 
         if (move.end_row, move.end_col) in valid_moves:
             # set the beginning square to blank space
@@ -93,6 +102,8 @@ class ChessGame():
             # TODO: set piece captured to be removed from the game
             # log the move
             return move.display_chess_notation(letters_map, chess_dimension, game_move_log, move_array)
+        else:
+            return []
 
 
 # if __name__ == '__main__':

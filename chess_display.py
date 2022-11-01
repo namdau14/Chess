@@ -63,6 +63,10 @@ class ChessDisplay():
         # array to keep track of every move in the game
         game_move_log = []
 
+        # array to keep track of valid moves of a piece
+
+        valid_moves = []
+
         # run the game
         run = True
         while run:
@@ -85,16 +89,18 @@ class ChessDisplay():
                             clicked_row = int((mouse_row - CENTER_INDEX) // PIECE_SIZE)
                             # save a move array to use for chess notation and to limit clicks
                             move_array.append((clicked_row, clicked_col))
+                            if len(move_array) == 1:
+                                valid_moves = chess_game.get_valid_moves(clicked_row, clicked_col)
                             if len(move_array) == 2:
                                 move = Move(chess_game.chess_board, move_array[0], move_array[1])
-                                game_move_log = chess_game.make_move(move, LETTERS_MAP, CHESS_DIMENSION, game_move_log, move_array)
-                                print(game_move_log)
+                                game_move_log = chess_game.make_move(move, LETTERS_MAP, CHESS_DIMENSION, game_move_log, move_array, valid_moves)
                                 # reset move array to continue with next move
                                 move_array = []              
+                                valid_moves = []
 
   
             # while game is running, display the current state of the game
-            self.display_current_state(board_screen, chess_game) 
+            self.display_current_state(board_screen, chess_game, valid_moves) 
             pygame.display.flip()
 
     '''
@@ -131,26 +137,32 @@ class ChessDisplay():
     display the current state of the game
     '''
 
-    def display_current_state(self, board_screen, chess_game):
-        self.display_board(board_screen)
+    def display_current_state(self, board_screen, chess_game, valid_moves):
+        self.display_board(board_screen, valid_moves)
         self.display_pieces(board_screen, chess_game)
         self.display_moveset_box(board_screen)
 
     '''
     display the chess board
     '''
-    def display_board(self, board_screen):
+    def display_board(self, board_screen, valid_moves):
         # light squares are placed where row num + col num = even number (zero index)
         # dark squares are placed where row num + col num = odd number (zero index)
 
         for row in range(CHESS_DIMENSION):
             for col in range(CHESS_DIMENSION):
                 surface = pygame.Surface((PIECE_SIZE, PIECE_SIZE))
+
                 if ((row + col) % 2 == 0):
                     surface.fill((177, 228, 185))
                 elif ((row + col) % 2 == 1):
                     surface.fill((112, 162, 163))
-                # multiply with row and col, essentially stacking the squares on top of each other
+                
+                # color the valid moves square
+
+                if (row, col) in valid_moves:
+                    pygame.draw.circle(surface, pygame.Color((180,180,180)), (PIECE_SIZE / 2, PIECE_SIZE / 2), PIECE_SIZE / 8, width = 0)
+                # multiply with row and col so that the sqaures fit in the correct index
                 board_screen.blit(surface, (CENTER_INDEX + col * PIECE_SIZE, CENTER_INDEX + row * PIECE_SIZE))
 
     '''

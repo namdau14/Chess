@@ -14,17 +14,17 @@ class Pawn():
         elif self.is_white == False:
             return 'black_pawn'
 
-    def is_valid_pawn_move(self, move, row, col):
+    def is_valid_pawn_move(self, start_row, start_col, end_row, end_col):
         # if (self.is_starting == True):
         #     return (abs(move.start_col - col) == 1) or (abs(move.start_col - col) == 2)
             
-        return (abs(move.start_row - row) == 1)
+        return (abs(start_row - end_row) == 1)
         
         
-    def get_valid_pawn_moves(self, move, chess_board):
+    def get_valid_pawn_moves(self, chess_board, start_row, start_col):
         valid_pawn_moves = []
         for row in range(len(chess_board)):
             for col in range(len(chess_board)):
-                if self.is_valid_pawn_move(move, row, col):
+                if self.is_valid_pawn_move(start_row, start_col, row, col) and not (start_row == row and start_col == col):
                     valid_pawn_moves.append((row, col))
         return valid_pawn_moves

@@ -12,13 +12,13 @@ class King():
         elif self.is_white == False:
             return 'black_king'
 
-    def is_valid_king_move(self, move, row, col):
-        return Queen.is_valid_queen_move(self, move, row, col) and (abs(move.start_row - row) == 1 or abs(move.start_col - col) == 1)
+    def is_valid_king_move(self, start_row, start_col, end_row, end_col):
+        return Queen.is_valid_queen_move(self, start_row, start_col, end_row, end_col) and (abs(start_row - end_row) == 1 or abs(start_col - end_col) == 1)
 
-    def get_valid_king_moves(self, move, chess_board):
+    def get_valid_king_moves(self, chess_board, start_row, start_col):
         valid_king_moves = []
         for row in range(len(chess_board)):
             for col in range(len(chess_board)):
-                if self.is_valid_king_move(move, row, col):
+                if self.is_valid_king_move(start_row, start_col, row, col) and not (start_row == row and start_col == col):
                     valid_king_moves.append((row, col))
         return valid_king_moves
