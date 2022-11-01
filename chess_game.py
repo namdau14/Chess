@@ -92,7 +92,7 @@ class ChessGame():
             self.chess_board[move.end_row][move.end_col] = move.piece_moved
             # TODO: set piece captured to be removed from the game
             # log the move
-            print(move.display_chess_notation(letters_map, chess_dimension, game_move_log, move_array))
+            return move.display_chess_notation(letters_map, chess_dimension, game_move_log, move_array)
 
 
 # if __name__ == '__main__':
