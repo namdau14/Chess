@@ -23,7 +23,7 @@ class Move():
         notation_string = ''
         if 'knight' in chess_board[row][col]:
             notation_string += 'N'
-        notation_string += str(letters_map[col + 1]) + str(chess_dimension - row)
+        notation_string += str(letters_map[col + 1]).lower() + str(chess_dimension - row)
         game_move_log.append(notation_string)
         return game_move_log
 
