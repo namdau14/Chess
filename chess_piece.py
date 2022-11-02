@@ -2,6 +2,8 @@
 
 # map to connect pieces to their string representation
 
+CHESS_DIMENSION = 8
+
 class ChessPiece(object):
     def __init__(self, is_white):
         self.is_white = is_white

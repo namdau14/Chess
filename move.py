@@ -21,8 +21,16 @@ class Move():
     def display_chess_notation(self, chess_board, letters_map, chess_dimension, game_move_log, move_array):
         row, col = move_array[1]
         notation_string = ''
+        if 'rook' in chess_board[row][col]:
+            notation_string += 'R'
         if 'knight' in chess_board[row][col]:
             notation_string += 'N'
+        if 'bishop' in chess_board[row][col]:
+            notation_string += 'B'
+        if 'queen' in chess_board[row][col]:
+            notation_string += 'Q'
+        if 'king' in chess_board[row][col]:
+            notation_string += 'K'
         notation_string += str(letters_map[col + 1]).lower() + str(chess_dimension - row)
         game_move_log.append(notation_string)
         return game_move_log

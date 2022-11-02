@@ -14,13 +14,10 @@ class Queen(ChessPiece):
         elif self.is_white == False:
             return 'black_queen'
 
-    def is_valid_queen_move(self, start_row, start_col, end_row, end_col):
-        return Rook.is_valid_rook_move(self, start_row, start_col, end_row, end_col) or Bishop.is_valid_bishop_move(self, start_row, start_col, end_row, end_col)
+    # def is_valid_queen_move(self, start_row, start_col, end_row, end_col):
+    #     return Rook.is_valid_rook_move(self, start_row, start_col, end_row, end_col) or Bishop.is_valid_bishop_move(self, start_row, start_col, end_row, end_col)
 
     def get_valid_queen_moves(self, chess_board, start_row, start_col):
-        valid_queen_moves = []
-        for row in range(len(chess_board)):
-            for col in range(len(chess_board)):
-                if self.is_valid_queen_move(start_row, start_col, row, col) and not (start_row == row and start_col == col):
-                    valid_queen_moves.append((row, col))
-        return valid_queen_moves
+        valid_rook_moves = Rook.get_valid_rook_moves(self, chess_board, start_row, start_col)
+        valid_bishop_moves = Bishop.get_valid_bishop_moves(self, chess_board, start_row, start_col)
+        return valid_rook_moves + valid_bishop_moves
