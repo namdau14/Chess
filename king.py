@@ -1,8 +1,9 @@
 # class to represent a king
 
+from chess_piece import ChessPiece
 from queen import Queen
 
-class King():
+class King(ChessPiece):
     def __init__(self, is_white = True):
         self.is_white = is_white
 

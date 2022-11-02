@@ -18,9 +18,13 @@ class Move():
     '''
     display the chess notation after a move
     '''
-    def display_chess_notation(self, letters_map, chess_dimension, game_move_log, move_array):
+    def display_chess_notation(self, chess_board, letters_map, chess_dimension, game_move_log, move_array):
         row, col = move_array[1]
-        game_move_log.append(str(letters_map[col + 1]) + str(chess_dimension - row))
+        notation_string = ''
+        if 'knight' in chess_board[row][col]:
+            notation_string += 'N'
+        notation_string += str(letters_map[col + 1]) + str(chess_dimension - row)
+        game_move_log.append(notation_string)
         return game_move_log
 
          

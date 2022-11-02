@@ -1,13 +1,17 @@
 # Generic class representing a chess piece, which will contain methods that all pieces in Chess share (unable to move with same side block,...)
 
+# map to connect pieces to their string representation
+
 class ChessPiece(object):
     def __init__(self, is_white):
         self.is_white = is_white
     
     '''
-    All pieces share the same distinction of unable to move while another piece of same color is blocking the square
+    Get piece color from string
     '''
-    def is_valid_move(self, chess_piece):
-        if chess_piece.is_white == self.is_white:
+    def is_piece_from_string(self, string):
+        if 'white' in string:
+            return True
+        elif 'black' in string:
             return False
 

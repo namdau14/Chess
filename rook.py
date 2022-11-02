@@ -1,7 +1,10 @@
 # class to represent a rook
 
 
-class Rook():
+from chess_piece import ChessPiece
+
+
+class Rook(ChessPiece):
     def __init__(self, is_white = True):
         self.is_white = is_white
 

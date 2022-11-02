@@ -1,7 +1,10 @@
 # class to represent a bishop
 
 
-class Bishop():
+from chess_piece import ChessPiece
+
+
+class Bishop(ChessPiece):
     def __init__(self, is_white = True):
         self.is_white = is_white
 

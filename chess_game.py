@@ -16,7 +16,7 @@ class ChessGame():
     # default constructor
     def __init__(self):
         # initial board
-        self.chess_board = [[' ' for i in range(8)] for j in range(8)]
+        self.chess_board = [[' ' for i in range(CHESS_DIMENSION)] for j in range(CHESS_DIMENSION)]
         # flag to represent if white is moving
         self.is_white = True
         # array to represent the list of moves that has been played
@@ -92,7 +92,7 @@ class ChessGame():
     """ 
     Make a move
     """
-    def make_move(self, move, letters_map, chess_dimension, game_move_log, move_array, valid_moves):
+    def make_move(self, chess_board, move, letters_map, chess_dimension, game_move_log, move_array, valid_moves):
 
         if (move.end_row, move.end_col) in valid_moves:
             # set the beginning square to blank space
@@ -101,7 +101,7 @@ class ChessGame():
             self.chess_board[move.end_row][move.end_col] = move.piece_moved
             # TODO: set piece captured to be removed from the game
             # log the move
-            return move.display_chess_notation(letters_map, chess_dimension, game_move_log, move_array)
+            return move.display_chess_notation(chess_board, letters_map, chess_dimension, game_move_log, move_array)
         else:
             return []
 

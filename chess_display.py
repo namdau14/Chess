@@ -102,7 +102,7 @@ class ChessDisplay():
                                 
                             if len(move_array) == 2:
                                 move = Move(chess_game.chess_board, move_array[0], move_array[1])
-                                game_move_log = chess_game.make_move(move, LETTERS_MAP, CHESS_DIMENSION, game_move_log, move_array, valid_moves)
+                                game_move_log = chess_game.make_move(chess_game.chess_board, move, LETTERS_MAP, CHESS_DIMENSION, game_move_log, move_array, valid_moves)
                                 # reset move array and valid moves to continue with next move
                                 move_array = []              
                                 valid_moves = []

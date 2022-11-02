@@ -1,9 +1,10 @@
 # class to represent a queen
 
+from chess_piece import ChessPiece
 from rook import Rook
 from bishop import Bishop
 
-class Queen():
+class Queen(ChessPiece):
     def __init__(self, is_white = True):
         self.is_white = is_white
 

@@ -1,7 +1,10 @@
 # class to represent a pawn
 
 
-class Pawn():
+from chess_piece import ChessPiece
+
+
+class Pawn(ChessPiece):
     def __init__(self, is_white = True, is_starting = True, is_en_passant = False, is_promoted = False):
         self.is_white = is_white
         self.is_starting = is_starting
