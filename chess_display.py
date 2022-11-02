@@ -173,10 +173,10 @@ class ChessDisplay():
                 if (row, col) in valid_moves:
                     # if the square is not empty, draw a bigger circle without filling to easily identify
                     if chess_game.chess_board[row][col] != ' ':
-                        pygame.draw.circle(surface, color = pygame.Color(192,192,192), center = (PIECE_SIZE / 2, PIECE_SIZE / 2), radius = PIECE_SIZE / 2, width = 4)
+                        pygame.draw.circle(surface, color = pygame.Color(255,100,100), center = (PIECE_SIZE / 2, PIECE_SIZE / 2), radius = PIECE_SIZE / 2, width = 4)
                     # else, draw smaller circle with filling
                     else:
-                        pygame.draw.circle(surface, color = pygame.Color(192,192,192), center = (PIECE_SIZE / 2, PIECE_SIZE / 2), radius = PIECE_SIZE / 8)
+                        pygame.draw.circle(surface, color = pygame.Color(255,100,100), center = (PIECE_SIZE / 2, PIECE_SIZE / 2), radius = PIECE_SIZE / 8)
                 # multiply with row and col so that the sqaures fit in the correct index
                 board_screen.blit(surface, (CENTER_INDEX + col * PIECE_SIZE, CENTER_INDEX + row * PIECE_SIZE))
 
@@ -226,7 +226,7 @@ class ChessDisplay():
 
         board_screen.blit(text, (x_cord + width / (CENTER_INDEX / 4), y_cord - CENTER_INDEX / 2))
 
-        pygame.draw.rect(board_screen, pygame.Color((0, 0, 0)), pygame.Rect(x_cord, y_cord, width, height), width = 2)
+        pygame.draw.rect(board_screen, pygame.Color((0, 0, 0)), pygame.Rect(x_cord, y_cord, width, height), width = 1)
 
 
 if __name__ == '__main__':
