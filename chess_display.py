@@ -1,7 +1,7 @@
 # used to display the game
 
 
-# TODO Get new images for the chess pieces. display moveset array on GUI. Implement pawn captures, pawn starting move, castling, en passant, promotion, check, checkmate, stalemate, draw rules
+# TODO Get new images for the chess pieces (optional). Make moveset scrollable. Add sounds for move. Implement pawn captures, castling, en passant, promotion, check, checkmate, stalemate, draw rules
 
 
 from chess_game import ChessGame
@@ -226,7 +226,7 @@ class ChessDisplay():
         pygame.draw.rect(board_screen, pygame.Color((0, 0, 0)), pygame.Rect(x_cord, y_cord, width, height), width = 1)
 
         # display the moves
-        move_font = pygame.font.SysFont(name = 'Calibri', size = 30)
+        move_font = pygame.font.SysFont(name = 'Times New Roman', size = 25)
 
         move_line_array = []
 
@@ -238,9 +238,10 @@ class ChessDisplay():
                 number_text = move_font.render(str((i + 2) // 2) + '.', True, pygame.Color(0, 0, 0))
                 move_text = move_font.render(move_line_array[0], True, pygame.Color(0, 0, 0))
                 # more maths
-                board_screen.blit(number_text, (x_cord + width / (CENTER_INDEX / 4), y_cord + CENTER_INDEX / 4 * i))
+                board_screen.blit(number_text, (x_cord + width / (CENTER_INDEX / 2), y_cord + CENTER_INDEX / 4 * i))
                 board_screen.blit(move_text, (x_cord + width / (CENTER_INDEX / 24), y_cord + CENTER_INDEX / 4 * i))
             if len(move_line_array) == 2:
+                # even more maths
                 move_text_two = move_font.render(move_line_array[1], True, pygame.Color(0, 0, 0))
                 board_screen.blit(move_text_two, (x_cord + width / (CENTER_INDEX / 64), y_cord + CENTER_INDEX / 4 * (i - 1)))
                 move_line_array = []
