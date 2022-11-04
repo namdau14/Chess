@@ -101,7 +101,6 @@ class ChessDisplay():
                             if len(move_array) == 2:
                                 move = Move(chess_game.chess_board, move_array[0], move_array[1])
                                 game_move_log = chess_game.make_move(chess_game.chess_board, move, LETTERS_MAP, CHESS_DIMENSION, game_move_log, move_array, valid_moves)
-                                print(game_move_log)
                                 # reset move array and valid moves to continue with next move
                                 move_array = []              
                                 valid_moves = []
@@ -228,10 +227,23 @@ class ChessDisplay():
 
         # display the moves
         move_font = pygame.font.SysFont(name = 'Calibri', size = 30)
-        for i in range(len(game_move_log)):
-            move_text = move_font.render(game_move_log[i], True, pygame.Color(0, 0, 0))
-            board_screen.blit(move_text, (x_cord + width / (CENTER_INDEX / 4), y_cord + CENTER_INDEX * i))
 
+        move_line_array = []
+
+
+        for i in range(len(game_move_log)):
+            move_line_array.append(game_move_log[i])
+            if len(move_line_array) == 1:
+                # maths
+                number_text = move_font.render(str((i + 2) // 2) + '.', True, pygame.Color(0, 0, 0))
+                move_text = move_font.render(move_line_array[0], True, pygame.Color(0, 0, 0))
+                # more maths
+                board_screen.blit(number_text, (x_cord + width / (CENTER_INDEX / 4), y_cord + CENTER_INDEX / 4 * i))
+                board_screen.blit(move_text, (x_cord + width / (CENTER_INDEX / 24), y_cord + CENTER_INDEX / 4 * i))
+            if len(move_line_array) == 2:
+                move_text_two = move_font.render(move_line_array[1], True, pygame.Color(0, 0, 0))
+                board_screen.blit(move_text_two, (x_cord + width / (CENTER_INDEX / 64), y_cord + CENTER_INDEX / 4 * (i - 1)))
+                move_line_array = []
 
 
 if __name__ == '__main__':

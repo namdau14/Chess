@@ -8,7 +8,6 @@ CHESS_DIMENSION = 8
 class Pawn(ChessPiece):
     def __init__(self, is_white, is_en_passant = False, is_promoted = False):
         self.is_white = is_white
-        self.is_starting = True
         self.is_en_passant = is_en_passant
         self.is_promoted = is_promoted
 
@@ -18,16 +17,15 @@ class Pawn(ChessPiece):
         elif self.is_white == False:
             return 'black_pawn'
 
-    def is_valid_white_pawn_move(self, start_row, start_col, end_row, end_col):
-        if (self.is_starting == True):
-            check = ((start_row - end_row == 1) or (start_row - end_row == 2)) and start_col == end_col
-            if check:
-                self.is_starting = False
-                return check
+    def is_valid_white_pawn_move(self, start_row, start_col, end_row, end_col, initial_row = 6):
+        if (start_row == initial_row):
+                return ((start_row - end_row == 1) or (start_row - end_row == 2)) and start_col == end_col
         return (start_row - end_row == 1) and start_col == end_col
 
-    def is_valid_black_pawn_move(self, start_row, start_col, end_row, end_col):
-        return self.is_valid_white_pawn_move(end_row, end_col, start_row, start_col)
+    def is_valid_black_pawn_move(self, start_row, start_col, end_row, end_col, initial_row = 1):
+        if (start_row == initial_row):
+                return ((end_row - start_row == 1) or (end_row - start_row == 2)) and start_col == end_col
+        return (end_row - start_row == 1) and start_col == end_col
         
         
     def get_valid_pawn_moves(self, chess_board, start_row, start_col):
