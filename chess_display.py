@@ -1,7 +1,7 @@
 # used to display the game
 
 
-# TODO Get new images for the chess pieces. display moveset array on GUI. Start implementing rules for pawn and king (castling). Start looking in to checks and checkmate
+# TODO Get new images for the chess pieces. display moveset array on GUI. Implement pawn captures, pawn starting move, castling, en passant, promotion, check, checkmate, stalemate, draw rules
 
 
 from chess_game import ChessGame
@@ -108,7 +108,7 @@ class ChessDisplay():
 
   
             # while game is running, display the current state of the game
-            self.display_current_state(board_screen, chess_game, valid_moves, clicked_row, clicked_col, move_array) 
+            self.display_current_state(board_screen, chess_game, valid_moves, clicked_row, clicked_col, move_array, game_move_log) 
             pygame.display.flip()
 
     '''
@@ -145,10 +145,10 @@ class ChessDisplay():
     display the current state of the game
     '''
 
-    def display_current_state(self, board_screen, chess_game, valid_moves, clicked_row, clicked_col, move_array):
+    def display_current_state(self, board_screen, chess_game, valid_moves, clicked_row, clicked_col, move_array, game_move_log):
         self.display_board(board_screen, chess_game, valid_moves)
         self.display_pieces(board_screen, chess_game, clicked_row, clicked_col, move_array)
-        self.display_moveset_box(board_screen)
+        self.display_moveset_box(board_screen, game_move_log)
 
     '''
     display the chess board
@@ -211,7 +211,7 @@ class ChessDisplay():
     '''
     display the moveset box
     '''
-    def display_moveset_box(self, board_screen):
+    def display_moveset_box(self, board_screen, game_move_log):
         # create moves text
         font = pygame.font.SysFont(name = 'Calibri', size = 50)
         text = font.render("Moves", True, pygame.Color(0, 0, 0))
@@ -225,6 +225,13 @@ class ChessDisplay():
         board_screen.blit(text, (x_cord + width / (CENTER_INDEX / 4), y_cord - CENTER_INDEX / 2))
 
         pygame.draw.rect(board_screen, pygame.Color((0, 0, 0)), pygame.Rect(x_cord, y_cord, width, height), width = 1)
+
+        # display the moves
+        move_font = pygame.font.SysFont(name = 'Calibri', size = 30)
+        for i in range(len(game_move_log)):
+            move_text = move_font.render(game_move_log[i], True, pygame.Color(0, 0, 0))
+            board_screen.blit(move_text, (x_cord + width / (CENTER_INDEX / 4), y_cord + CENTER_INDEX * i))
+
 
 
 if __name__ == '__main__':

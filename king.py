@@ -25,7 +25,6 @@ class King(ChessPiece):
         for x, y in directions:
             end_row = start_row + x
             end_col = start_col + y
-            print((end_row, end_col))
             # no need for while loop since kings only move one square
             if 0 <= end_row < CHESS_DIMENSION and 0 <= end_col < CHESS_DIMENSION: 
                 end_square = chess_board[end_row][end_col]
