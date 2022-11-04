@@ -1,9 +1,7 @@
 # used to display the game
 
 
-# TODO Get new images for the chess pieces. display moveset array on GUI. Start implementing rules for pawn and king (castling), implement white-black move switching. Start looking in to checks and checkmate
-# TODO tomorrow: implement dfs algorithm for rook and bishop
-# FIXIT: Pieces of the same color don't capture each other
+# TODO Get new images for the chess pieces. display moveset array on GUI. Start implementing rules for pawn and king (castling). Start looking in to checks and checkmate
 
 
 from chess_game import ChessGame
